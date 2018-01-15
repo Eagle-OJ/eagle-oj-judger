@@ -1,7 +1,5 @@
 
-config={
-    #设置代码，测试用例等文件的位置
-    'outfile':'/usr/JudgeResult',
+lang_config={
     'JAVA8':{
         'exe_path':'/usr/bin/java',
         'max_memory':-1,
@@ -57,4 +55,15 @@ config={
             'seccomp_rule': 'general',
         }
     }
+}
+
+sys_config = {
+    #提交的代码和测试用例存储的位置
+    'outfile': '/usr/JudgeResult',
+    #是否删除每次所产生的文件
+    'removefile':True,
+    #model包的路径
+    'model':'/usr/Judger/judge3/model',
+    #server包的路径
+    'server':'/usr/Judger/judge3/server'
 }

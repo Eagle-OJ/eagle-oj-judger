@@ -2,7 +2,7 @@ import copy
 from model.C_CPP import C_CPP
 from model.JAVA import JAVA
 
-from server.language_config import config
+from server.config import lang_config
 from model.PYTHON import PYTHON
 
 
@@ -13,7 +13,7 @@ class LanguageFactory:
         self.outfile = outfile
 
     def get_obj(self,**kwargs):
-        my_config = copy.deepcopy(config)
+        my_config = copy.deepcopy(lang_config)
         if(self.language=='JAVA8'):
             obj = JAVA(my_config[self.language])
             obj.replace(self.outfile,kwargs['max_memory'])

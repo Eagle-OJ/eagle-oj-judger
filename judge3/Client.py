@@ -1,14 +1,25 @@
 import json
 from server.Server import JudgeServer
 from flask import Flask, request, Response
+from server.Validate import Validate
 import gevent.monkey
 
 gevent.monkey.patch_all()
 
 app = Flask(__name__)
+
 @app.route('/json',methods=['POST'])
 def get_judge_result():
 	data = json.loads(request.get_data().decode('utf-8'))
+	validate = Validate(data)
+
+	#判断输入参数是否合法
+	if(not validate.validateAgrs()):
+		result = {
+			'errorMessage':'agrs are not legal',
+			'status':'fail'
+		}
+		return Response(json.dumps(result), mimetype='application/json')
 	#判断标准输入是否为空null或者为空字符串
 	for item in data['test_cases']:
 		index = data['test_cases'].index(item)

@@ -2,10 +2,11 @@ import uuid
 import subprocess
 import os
 import _judger
+import psutil
 import shutil
 from server.Factory import LanguageFactory
 from server.CodeResultEnum import CodeResult
-from server.language_config import config
+from server.config import sys_config
 
 class JudgeServer:
 
@@ -39,7 +40,7 @@ class JudgeServer:
 
     def judge(self):
         # outfile = 'E:/JudgeResult/'
-        outfile = config['outfile']
+        outfile = sys_config['outfile']
         #存放每个测试用例的结果
         test_cases_result = []
         #默认判断结果返回值为'AC
@@ -86,10 +87,13 @@ class JudgeServer:
             'time': round(time / test_cases_num, 2),
             'memory': int(memory / test_cases_num),
             'result': total_result,
-            'test_case': test_cases_result
+            'test_cases': test_cases_result,
+            'memory_percent':str(psutil.virtual_memory().percent)+'%',
+            'available_memeory':round(psutil.virtual_memory().available/1024**3,2)
         }
         #remove the directory
-        shutil.rmtree(filename)
+        if(sys_config['removefile']):
+            shutil.rmtree(filename)
         return result
 
     def runCode(self,language,**kwargs):
@@ -98,14 +102,6 @@ class JudgeServer:
             if compileErrorResult != '':
                 return {'result':'CE',
                         'error_message':compileErrorResult}
-        # else:
-        # ret = {'cpu_time': 0,
-        #        'signal': 0,
-        #        'memory': 4554752,
-        #        'exit_code': 0,
-        #        'result': 2,
-        #        'error': 0,
-        #        'real_time': 2000}
         ret = _judger.run(max_cpu_time=1000,
                           max_real_time=kwargs['time_limit'],
                           max_memory=language.getMax_memory(),
