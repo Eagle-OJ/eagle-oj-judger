@@ -34,12 +34,13 @@ proc_name = 'gunicorn.proc'
 ### 系统说明
 1. 目前支持python36,java8,python27,c,c++五种编程语言.
 2. sys_config说明：
-		1.  outfile为提交带代码所产生的临时文件存放路径
-		2.  removefile：每次判断后是否删除文件,默认为True,即每次都删除
-		3.  server:server包的路径
-		4.  model:model包的路径
+	1.  outfile为提交带代码所产生的临时文件存放路径
+	2.  removefile：每次判断后是否删除文件,默认为True,即每次都删除
+	3.  server:server包的路径
+	4.  model:model包的路径
 3.  表单传输字段说明:
->  {
+> 
+ {
     "lang": "CPP",
     "source_code": "#include<iostream>\nusing namespace std;int main(){cout<<\"hello\"<<endl;return 0;}",
     "time_limit": "3",
@@ -69,8 +70,9 @@ proc_name = 'gunicorn.proc'
   6. stdin:标准输入值
   7. stdout:期望输出值
 
-4.返回接过值说明：
-> {
+4.返回结果值说明：
+> 
+{
     "test_cases": [
         {
             "result": "AC",
