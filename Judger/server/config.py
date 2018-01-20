@@ -65,12 +65,7 @@ sys_config = {
     #model包的路径
     'model':'/usr/eagle-oj-judger/Judger/model',
     #server包的路径
-<<<<<<< HEAD
-    'server':'/usr/eagle-oj-judger/Judger/server'
-}
-=======
     'server':'/usr/eagle-oj-judger/Judger/server',
     'uid':1001,
     'gid':1001
 }
->>>>>>> 1fadf65d870f6fba45585955ee21f5d66292a816
