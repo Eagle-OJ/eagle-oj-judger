@@ -6,11 +6,12 @@
 mkdir build && cd build && cmake .. && make && sudo make install
 
 2.python binding
->sudo python setup.py install
+> sudo python setup.py install  
+> #位于eagle-oj-judger/bindings/Python/目录下
 
 3.add server packge and model packge to python environemnt
 > sudo python3 initEnv.py   
-#位于Judger/judgeinit目录下
+#位于eagle-oj-judger/Judger/server/目录下
 
 4.Get IP
 > sudo ip address  
@@ -18,13 +19,13 @@ mkdir build && cd build && cmake .. && make && sudo make install
 
 5.Edit gunicorn.conf
 
-> import os
-bind = '10.151.26.112:5000'  #注意将这里的IP修改为自己本机的IP或者直接127.O.0.1:5000，端口号自定义  
+> import os  
+bind = '10.151.26.112:5000'  #注意将这里的IP修改为自己本机的IP或者直接127.0.0.1:5000，端口号自定义  
 workers = 4     #进程数  
 backlog = 2048      #监听队列  
 worker_class = "gevent"     #使用gevent模式，还可以使用sync 模式，默认的是sync模式  
 debug = True  
-chdir = '/usr/Judger/Judger' #Client.py所在位置  
+chdir = '/usr/eagle-oj-judger/Judger' #Client.py所在位置  
 proc_name = 'gunicorn.proc'
 
 6.launch the judger
@@ -48,10 +49,14 @@ proc_name = 'gunicorn.proc'
 	-  removefile：每次判断后是否删除文件,默认为True,即每次都删除
 	-  server:server包的路径
 	-  model:model包的路径
+	-  uid:执行代码的uid
+	-  gid:用于执行代码的gid
 3.  **表单传输字段说明**:
->  {
-    "lang": "CPP",  
-    "source_code": "#include<iostream>\nusing namespace std;int main(){cout<<\"hello\"<<endl;return 0;}",  
+
+```
+ {
+    "lang": "PYTHON36",  
+    "source_code": "print('hello')",  
     "time_limit": "3",  
     "memory_limit": "128",  
     "test_cases": [  
@@ -70,6 +75,8 @@ proc_name = 'gunicorn.proc'
     ]  
   }
   
+```
+
   - lang:编程语言种类
   - source_code:需要提交的代码
   - time_limit:运行时间限制
@@ -79,7 +86,8 @@ proc_name = 'gunicorn.proc'
       2. stdout:期望输出值
 
 4. **返回结果值说**明：
-> {  
+```
+{  
     "test_cases": [  
         {  
             "result": "AC",  
@@ -101,6 +109,8 @@ proc_name = 'gunicorn.proc'
     "memory_percent": "31.6%"  
 }
 
+```
+
  -  test_cases:
 	1. result：测试点结果
 	2. error_message: 测试点异常信息
@@ -115,4 +125,4 @@ proc_name = 'gunicorn.proc'
     - RTE: Runtime Eroor 运行时错误
     - SE: System Error 系统错误
     - TLE:Time Limit Error 运行超时错误
-    - CE: 编译错误
+    - CE: Compile Error 编译错误

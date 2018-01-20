@@ -63,7 +63,7 @@ sys_config = {
     #是否删除每次所产生的文件
     'removefile':True,
     #model包的路径
-    'model':'/usr/Judger/judge3/model',
+    'model':'/usr/eagle-oj-judger/Judger/model',
     #server包的路径
-    'server':'/usr/Judger/judge3/server'
+    'server':'/usr/eagle-oj-judger/Judger/server'
 }
