@@ -120,8 +120,8 @@ class JudgeServer:
                           log_path="judger.log",
                           # can be None
                           seccomp_rule_name=language.getRun_rule(),
-                          uid=1001,
-                          gid=1001)
+                          uid=sys_config['uid'],
+                          gid=sys_config['gid'])
         if ret['result'] == CodeResult.SYSTEM_ERROR:
             return {'result': 'SE',
                     'error_message': 'System Error'}
