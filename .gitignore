@@ -1,0 +1,9 @@
+judge3/.idea/
+build/
+.DS_Store
+*.log
+*.swp
+*.so
+__pycache__
+*.pyc
+cmake-build-debug/
