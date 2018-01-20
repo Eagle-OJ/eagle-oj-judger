@@ -1,5 +1,5 @@
 import json
-from language_config import  config
+from server.config import lang_config
 
 class Validate:
     def __init__(self,data):
@@ -24,7 +24,7 @@ class Validate:
         if(len(args['test_cases']) == 0):
             return False
 
-        if(args['lang'] not in config):
+        if(args['lang'] not in lang_config):
             return False
 
         else:

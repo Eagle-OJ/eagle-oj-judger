@@ -115,4 +115,4 @@ proc_name = 'gunicorn.proc'
     - RTE: Runtime Eroor 运行时错误
     - SE: System Error 系统错误
     - TLE:Time Limit Error 运行超时错误
-    - CE: 编译错误
+    - CE: Compile Error编译错误
