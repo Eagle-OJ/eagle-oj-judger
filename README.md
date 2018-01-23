@@ -1,5 +1,5 @@
-﻿# Eagle-OJ-Judger
-基于Restful的开源判卷核心
+
+# eagle-oj-judger
 
 # 自行配置
 
@@ -33,25 +33,35 @@ pip install -y gevent
 
 3.add server packge and model packge to python environemnt
 > sudo python3 initEnv.py   
-#位于eagle-oj-judger/Judger/server/目录下
+ #位于eagle-oj-judger/Judger/server/目录下
 
-4.Get IP
-> sudo ip address  
-> 获取IP地址并且可以添加到Judger/gunicorn中
-
-5.Edit gunicorn.conf
+4.Edit gunicorn.conf
 
 > import os  
-> bind = '10.151.26.112:5000'  #注意将这里的IP修改为自己本机的IP或者直接127.0.0.1:5000，端口号自定义  
-> workers = 4     #进程数  
-> backlog = 2048      #监听队列  
-> worker_class = "gevent"     #使用gevent模式，还可以使用sync 模式，默认的是sync模式  
-> debug = True  
-> chdir = '/usr/eagle-oj-judger/Judger' #Client.py所在位置  
-> proc_name = 'gunicorn.proc'
 
-6.launch the judger
-> gunicorn -k gevent -c gunicorn.conf Client:app#进入到Judger目录下在终端输入一下命令
+bind = '10.151.26.112:5000'  #注意将这里的IP修改为自己本机的IP或者直接127.O.0.1:5000，端口号自定义  
+workers = 4     #进程数  
+backlog = 2048      #监听队列  
+worker_class = "gevent"     #使用gevent模式，还可以使用sync 模式，默认的是sync模式  
+debug = True  
+chdir = '/usr/Judger/Judger' #Client.py所在位置  
+proc_name = 'gunicorn.proc'
+
+5.install virtualenv
+> pip3 install virtualenv  
+ #如果已经安装virtualenv则跳过此步  
+ cd /usr && mkdir myenv  && cd mkdir   
+ virtualenv -p /usr/bin/python3.5 py3env  
+ #创建Python3.5虚拟环境   
+ virtualenv --system-site-packages py3env  
+ #将本地pyton3.5所有的包添加到虚拟环境当中  
+ cd py3env && source bin/activate  
+ #进入到虚拟环境的文件夹并且启动虚拟环境   
+  deactivate  
+ #如果需要退出虚拟环境执行该命令
+
+ 6.launch the judger
+ > gunicorn -k gevent -c gunicorn.conf Client:app#进入到Judger目录下在终端输入一下命令,并且需要在虚拟环境激活的情况下令
 
 ---
 ## 判卷机说明
@@ -65,13 +75,14 @@ pip install -y gevent
     - Java8
     - C++
     - C
-2. **sys_config说明**：
-  -  outfile为提交带代码所产生的临时文件存放路径
-  -  removefile：每次判断后是否删除文件,默认为True,即每次都删除
-  -  server:server包的路径
-  -  model:model包的路径
-  -  uid:执行代码的uid
-  -  gid:用于执行代码的gid
+
+2. **sys_config**：
+	-  outfile为提交带代码所产生的临时文件存放路径
+	-  removefile：每次判断后是否删除文件,默认为True,即每次都删除
+	-  server:server包的路径
+	-  model:model包的路径
+	-  uid:执行代码的uid
+	-  gid:用于执行代码的gid
 3. **表单传输字段说明**:
 
 ```
@@ -95,7 +106,7 @@ pip install -y gevent
       }  
     ]  
   }
-  
+
 ```
 
   - lang:编程语言种类
@@ -106,7 +117,7 @@ pip install -y gevent
       1. stdin:标准输入值
       2. stdout:期望输出值
 
-4. **返回结果值说**明：
+4. **返回结果值**：
 ```
 {  
     "test_cases": [  

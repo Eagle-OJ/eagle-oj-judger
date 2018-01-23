@@ -2,7 +2,6 @@ import uuid
 import subprocess
 import os
 import _judger
-import psutil
 import shutil
 from server.Factory import LanguageFactory
 from server.CodeResultEnum import CodeResult
@@ -15,11 +14,10 @@ class JudgeServer:
 
     def make_dir(self,outfile):
         count = 0
-        fileName = outfile+str(uuid.uuid1())
-        # fileName = outFile+'1'
+        fileName = outfile+'/'+str(uuid.uuid1())
+        # 以uuid创建一个文件
         stdout = fileName+'/stdout/'
         stdin = fileName+'/stdin/'
-        # 以uuid创建一个文件
         if not os.path.exists(fileName):
             os.mkdir(fileName)
 
@@ -63,7 +61,7 @@ class JudgeServer:
 
 
         for i in range(0,test_cases_num):
-            run_result = self.runCode(language, 
+            run_result = self.runCode(language,
                                         stdin=filename + '/stdin/' + str(i) + '.in',
                                         factout=filename + '/factout/' + str(i) + '.out',
                                         stderr=filename + '/stderr/' + str(i) + '.out',
@@ -88,8 +86,6 @@ class JudgeServer:
             'memory': int(memory / test_cases_num),
             'result': total_result,
             'test_cases': test_cases_result,
-            'memory_percent':str(psutil.virtual_memory().percent)+'%',
-            'available_memeory':round(psutil.virtual_memory().available/1024**3,2)
         }
         #remove the directory
         if(sys_config['removefile']):

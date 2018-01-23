@@ -29,6 +29,14 @@ def get_judge_result():
 	sever = JudgeServer(data)
 	result = sever.judge()
 	return Response(json.dumps(result), mimetype='application/json')
+	
+@app.route('/status', methods=['GET'])
+def get_status():
+	status ={
+ 		    'memory_percent':str(psutil.virtual_memory().percent)+'%',
+            'available_memeory':round(psutil.virtual_memory().available/1024**3,2)
+ 		}
+	return Response(json.dumps(status), mimetype='application/json')
 
 #gunicorn -k gevent -c gunicorn.conf Client:app
 if __name__ == '__main__':

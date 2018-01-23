@@ -66,6 +66,7 @@ sys_config = {
     'model':'/usr/eagle-oj-judger/Judger/model',
     #server包的路径
     'server':'/usr/eagle-oj-judger/Judger/server',
+    #指定运行系统的uid和gid,为了保证系统的安全运行请务必创建新用户
     'uid':1001,
     'gid':1001
 }
