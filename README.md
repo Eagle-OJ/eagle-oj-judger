@@ -25,16 +25,16 @@ chdir = '/usr/Judger/Judger' #Client.py所在位置
 proc_name = 'gunicorn.proc'
 
 5.install virtualenv
-> pip3 install virtualenv
+> pip3 install virtualenv  
  #如果已经安装virtualenv则跳过此步  
- cd /usr && mkdir myenv  && cd mkdir  
- virtualenv -p /usr/bin/python3.5 py3env
+ cd /usr && mkdir myenv  && cd mkdir   
+ virtualenv -p /usr/bin/python3.5 py3env  
  #创建Python3.5虚拟环境   
- virtualenv --system-site-packages py3env
+ virtualenv --system-site-packages py3env  
  #将本地pyton3.5所有的包添加到虚拟环境当中  
- cd py3env && source bin/activate
+ cd py3env && source bin/activate  
  #进入到虚拟环境的文件夹并且启动虚拟环境   
-  deactivate
+  deactivate  
  #如果需要退出虚拟环境执行该命令
 
  6.launch the judger
