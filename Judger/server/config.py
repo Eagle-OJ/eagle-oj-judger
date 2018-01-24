@@ -58,6 +58,8 @@ lang_config={
 }
 
 sys_config = {
+	#日志文件所在路径
+	'logfile':'/usr/eagle-oj-judger/Judger/judge.log',
     #提交的代码和测试用例存储的位置
     'outfile': '/usr/JudgeResult',
     #是否删除每次所产生的文件

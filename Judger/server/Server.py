@@ -82,7 +82,7 @@ class JudgeServer:
                 total_result = item['result']
                 break
         result = {
-            'time': round(time / test_cases_num, 2),
+            'time': round((time / test_cases_num)+0.01,2),
             'memory': int(memory / test_cases_num),
             'result': total_result,
             'test_cases': test_cases_result,
@@ -113,7 +113,7 @@ class JudgeServer:
                           # args=[],
                           # can be empty list
                           env=[],
-                          log_path="judger.log",
+                          log_path=sys_config['logfile'],
                           # can be None
                           seccomp_rule_name=language.getRun_rule(),
                           uid=sys_config['uid'],
@@ -141,7 +141,7 @@ class JudgeServer:
         else:
             if not self.checkFile(kwargs['stdout'], kwargs['factout']):
                 return {
-                    'result': 'Wrong Answer',
+                    'result': 'WA',
                     'error_message': None,
                     'time': ret['real_time'] / 1000.00,
                 	'memory': ret['memory'] / (1000 * 1000)
@@ -180,5 +180,5 @@ class JudgeServer:
         for i in range(0, std_lines_num):
             if (std_lines[i] != fact_lines[i]):
                 return False
-            else:
-                return True
+        else:
+            return True
