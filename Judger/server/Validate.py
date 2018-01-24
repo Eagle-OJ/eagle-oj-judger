@@ -19,10 +19,14 @@ class Validate:
             return False
 
         if(int(args['time_limit']) <= 0 or int(args['memory_limit']) <= 0):
-            return False
+            return False 
 
         if(len(args['test_cases']) == 0):
             return False
+        if(not len(args['test_cases']) == 0):
+            for test_case in args['test_cases']:
+                if 'stdin' not in test_case or 'stdout' not in test_case:
+                    return False
 
         if(args['lang'] not in lang_config):
             return False
