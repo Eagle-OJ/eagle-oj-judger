@@ -38,7 +38,6 @@ pip install -y gevent
 4.Edit gunicorn.conf
 
 > import os  
-
 bind = '10.151.26.112:5000'  #注意将这里的IP修改为自己本机的IP或者直接127.O.0.1:5000，端口号自定义  
 workers = 4     #进程数  
 backlog = 2048      #监听队列  

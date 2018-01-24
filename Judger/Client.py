@@ -3,6 +3,7 @@ from server.Server import JudgeServer
 from flask import Flask, request, Response
 from server.Validate import Validate
 import gevent.monkey
+import psutil
 
 gevent.monkey.patch_all()
 
@@ -16,19 +17,27 @@ def get_judge_result():
 	#判断输入参数是否合法
 	if(not validate.validateAgrs()):
 		result = {
-			'errorMessage':'agrs are not legal',
-			'status':'fail'
+			'error_message':'agrs are not legal',
+			'result':'SE'
 		}
 		return Response(json.dumps(result), mimetype='application/json')
-	#判断标准输入是否为空null或者为空字符串
-	for item in data['test_cases']:
-		index = data['test_cases'].index(item)
-		if item['stdin'] == None or len(item['stdin']) == 0:
-			data['test_cases'][index]['stdin'] = ' '
 
-	sever = JudgeServer(data)
-	result = sever.judge()
-	return Response(json.dumps(result), mimetype='application/json')
+	try:
+			#判断标准输入是否为空null或者为空字符串
+		for item in data['test_cases']:
+			index = data['test_cases'].index(item)
+			if item['stdin'] == None or len(item['stdin']) == 0:
+				data['test_cases'][index]['stdin'] = ''
+		sever = JudgeServer(data)
+		result = sever.judge()
+	except:
+		error = {
+			'result':'SE',
+			'error_message':'Client Error'
+		}
+		return Response(json.dumps(error), mimetype='application/json')
+	else:
+		return Response(json.dumps(result), mimetype='application/json')
 	
 @app.route('/status', methods=['GET'])
 def get_status():
