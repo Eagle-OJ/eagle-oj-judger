@@ -11,7 +11,7 @@ RUN apt update && \
 	apt install -y  python3-pip && \
 	apt install -y  libseccomp-dev && \
 	apt install -y  git && \
-	pip3 install --no-cache-dir flask gunicorn gevent virtualenv && \
+	pip3 install --no-cache-dir flask gunicorn gevent virtualenv psutil && \
 	cd /usr && \
 	git clone https://github.com/Eagle-OJ/eagle-oj-judger.git --depth=1 && \
 	cd eagle-oj-judger && \
