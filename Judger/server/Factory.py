@@ -24,7 +24,7 @@ class LanguageFactory:
             obj.replace(self.outfile)
             obj.to_list()
             return obj
-        if (self.language == 'PYTHON36' or self.language == 'PYTHON27'):
+        if (self.language == 'PYTHON35' or self.language == 'PYTHON27'):
             obj = PYTHON(my_config[self.language])
             obj.replace(self.outfile)
             obj.to_list()

@@ -11,7 +11,7 @@ lang_config={
             'seccomp_rule':None,
         }
     },
-    'PYTHON36':{
+    'PYTHON35':{
         'exe_path':'/usr/bin/python3.5',
         'max_memory': 128 * 1024 * 1024,
         'source_name':'Main.py',
