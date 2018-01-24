@@ -22,14 +22,16 @@ RUN apt update && \
 	make install && \
 	cd ../bindings/Python && \
 	python3 setup.py install && \
+	python3 /usr/eagle-oj-judger/Judger/server/initEnv.py  && \
 	cd /usr && \
 	mkdir myenv && \
 	cd myenv && \
 	virtualenv --system-site-packages py3env && \
-	cd py3env && source bin/activate && \
-	python /usr/eagle-oj-judger/Judger/server/initEnv.py  && \
+	useradd -u 1001 compiler && \
 	apt clean && \
 	apt autoremove && \
-	rm -rf /var/lib/apt/lists/* && \
-	useradd -u 1001 compiler
+	rm -rf /var/lib/apt/lists/*
+
+CMD ./usr/eagle-oj-judger/run.sh
+
 EXPOSE 5000
