@@ -30,7 +30,8 @@ RUN apt update && \
 	useradd -u 1001 compiler && \
 	apt clean && \
 	apt autoremove && \
-	rm -rf /var/lib/apt/lists/*
+	rm -rf /var/lib/apt/lists/* && \
+	chmod +x /usr/eagle-oj-judger/run.sh
 
 CMD ./usr/eagle-oj-judger/run.sh
 
