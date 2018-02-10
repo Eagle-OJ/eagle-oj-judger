@@ -25,13 +25,20 @@ pip install -y gunicorn
 pip install -y gevent
 ```
 1.Build
+
 `sudo apt-get install libseccomp-dev`
+
 `mkdir build && cd build && cmake .. && make && sudo make install`
 2.python binding
+
 `sudo python setup.py install  #位于eagle-oj-judger/bindings/Python/目录`
+
 3.add server packge and model packge to python environemnt
+
 `sudo python3 initEnv.py #位于eagle-oj-judger/Judger/server/目录下`
+
 4.Edit gunicorn.conf
+
 ```python
 import os  
 bind = '0.0.0.0:5000'  #注意将这里的IP修改为自己本机的IP或者直接127.O.0.1:5000，端口号自定义  
