@@ -29,6 +29,7 @@ pip install -y gevent
 `sudo apt-get install libseccomp-dev`
 
 `mkdir build && cd build && cmake .. && make && sudo make install`
+
 2.python binding
 
 `sudo python setup.py install  #位于eagle-oj-judger/bindings/Python/目录`
@@ -59,6 +60,7 @@ cd py3env && source bin/activate #进入到虚拟环境的文件夹并且启动�
 deactivate #如果需要退出虚拟环境执行该命令 
 ```
 6.launch the judger
+
 `gunicorn -k gevent -c gunicorn.conf Client:app #进入到Judger目录下在终端输入一下命令,并且需要在虚拟环境激活的情况下令`
 
 ### 判卷机说明
