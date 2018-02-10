@@ -1,9 +1,13 @@
 
 # eagle-oj-judger
 
-# 自行配置
+## Document
 
-## 环境安装
+You can see document in http://docs.eagleoj.com/#/en/judger .
+
+## You don't need to read following things
+
+### 环境安装
 
 我们使用Ubuntu16.04已经通过测试
 
@@ -20,50 +24,37 @@ pip install -y flask
 pip install -y gunicorn
 pip install -y gevent
 ```
-
-
-
 1.Build
-> sudo apt-get install libseccomp-dev  
-> mkdir build && cd build && cmake .. && make && sudo make install
-
+`sudo apt-get install libseccomp-dev`
+`mkdir build && cd build && cmake .. && make && sudo make install`
 2.python binding
-> sudo python setup.py install  
-> #位于eagle-oj-judger/bindings/Python/目录下
-
+`sudo python setup.py install  #位于eagle-oj-judger/bindings/Python/目录`
 3.add server packge and model packge to python environemnt
-> sudo python3 initEnv.py   
- #位于eagle-oj-judger/Judger/server/目录下
-
+`sudo python3 initEnv.py #位于eagle-oj-judger/Judger/server/目录下`
 4.Edit gunicorn.conf
-
-> import os  
-bind = '10.151.26.112:5000'  #注意将这里的IP修改为自己本机的IP或者直接127.O.0.1:5000，端口号自定义  
+```python
+import os  
+bind = '0.0.0.0:5000'  #注意将这里的IP修改为自己本机的IP或者直接127.O.0.1:5000，端口号自定义  
 workers = 4     #进程数  
-backlog = 2048      #监听队列  
-worker_class = "gevent"     #使用gevent模式，还可以使用sync 模式，默认的是sync模式  
+backlog  = 2048      #监听队列  
+worker_class = "gevent"  #使用gevent模式，还可以使用sync 模式，默认的是sync模式  
 debug = True  
 chdir = '/usr/Judger/Judger' #Client.py所在位置  
 proc_name = 'gunicorn.proc'
-
+```
 5.install virtualenv
-> pip3 install virtualenv  
- #如果已经安装virtualenv则跳过此步  
- cd /usr && mkdir myenv  && cd mkdir   
- virtualenv -p /usr/bin/python3.5 py3env  
- #创建Python3.5虚拟环境   
- virtualenv --system-site-packages py3env  
- #将本地pyton3.5所有的包添加到虚拟环境当中  
- cd py3env && source bin/activate  
- #进入到虚拟环境的文件夹并且启动虚拟环境   
-  deactivate  
- #如果需要退出虚拟环境执行该命令
+```bash
+pip3 install virtualenv #如果已经安装virtualenv则跳过此步
+cd /usr && mkdir myenv  && cd mkdir   
+virtualenv -p /usr/bin/python3.5 py3env  #创建Python3.5虚拟环境   
+virtualenv --system-site-packages py3env #将本地pyton3.5所有的包添加到虚拟环境当中  
+cd py3env && source bin/activate #进入到虚拟环境的文件夹并且启动虚拟环境    
+deactivate #如果需要退出虚拟环境执行该命令 
+```
+6.launch the judger
+`gunicorn -k gevent -c gunicorn.conf Client:app #进入到Judger目录下在终端输入一下命令,并且需要在虚拟环境激活的情况下令`
 
- 6.launch the judger
- > gunicorn -k gevent -c gunicorn.conf Client:app#进入到Judger目录下在终端输入一下命令,并且需要在虚拟环境激活的情况下令
-
----
-## 判卷机说明
+### 判卷机说明
 
 本判卷系统核心部分使用的是青岛大学的OJ判卷系统，在安装过程中如果出现疑问地方。[可以点击这里](http://docs.onlinejudge.me/#/judger/api)。
 
