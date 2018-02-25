@@ -1,4 +1,4 @@
-FROM d87904488/ubuntu-cn
+FROM ubuntu:16.04
 
 RUN apt update && \
 	apt install -y python && \
