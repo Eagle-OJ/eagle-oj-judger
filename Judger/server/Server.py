@@ -55,7 +55,7 @@ class JudgeServer:
         #根据json去工厂当中获取对应对象
         language_factory = LanguageFactory(language=lang,outfile=filename)
         #参数为可选参数，因为在java当中需要手动设置内存
-        language = language_factory.get_obj(max_memory=self.data['memory_limit'])
+        language = language_factory.get_obj(max_memory=self.data['memory_limit'],data = self.data)
         #write sourcecode,the content is gotten from data['source_code']
         self.writeFile(fileName=filename + '/' + language.getSourceName(), fileContent=self.data['source_code'])
 
@@ -83,7 +83,7 @@ class JudgeServer:
                 break
         result = {
             'time': round((time / test_cases_num)+0.01,2),
-            'memory': int(memory / test_cases_num),
+            'memory': int(memory / test_cases_num)+1,
             'result': total_result,
             'test_cases': test_cases_result,
         }
@@ -93,6 +93,7 @@ class JudgeServer:
         return result
 
     def runCode(self,language,**kwargs):
+        print(language.getMax_memory())
         if (language.getComplication() == True):
             compileErrorResult = self.checkRunnable(language.getCompileCommand())
             if compileErrorResult != '':
@@ -175,6 +176,8 @@ class JudgeServer:
             std_lines[-1] = std_lines[-1].rstrip('\n')
         if ('\n' in fact_lines[-1]):
             fact_lines[-1] = fact_lines[-1].rstrip('\n')
+        fact_lines[-1] = fact_lines[-1].rstrip()
+        std_lines[-1] = std_lines[-1].rstrip()
         if (fact_lines_num > std_lines_num or fact_lines_num < std_lines_num):
             return False
         for i in range(0, std_lines_num):

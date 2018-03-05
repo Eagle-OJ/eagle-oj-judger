@@ -30,15 +30,15 @@ def get_judge_result():
 				data['test_cases'][index]['stdin'] = ''
 		sever = JudgeServer(data)
 		result = sever.judge()
-	except:
+	except Exception as e:
 		error = {
 			'result':'SE',
-			'error_message':'Client Error'
+			'error_message':'Client Error: '+str(e)
 		}
 		return Response(json.dumps(error), mimetype='application/json')
 	else:
 		return Response(json.dumps(result), mimetype='application/json')
-	
+
 @app.route('/status', methods=['GET'])
 def get_status():
 	status ={
