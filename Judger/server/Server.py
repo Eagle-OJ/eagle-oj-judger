@@ -93,7 +93,6 @@ class JudgeServer:
         return result
 
     def runCode(self,language,**kwargs):
-        print(language.getMax_memory())
         if (language.getComplication() == True):
             compileErrorResult = self.checkRunnable(language.getCompileCommand())
             if compileErrorResult != '':
@@ -176,8 +175,8 @@ class JudgeServer:
             std_lines[-1] = std_lines[-1].rstrip('\n')
         if ('\n' in fact_lines[-1]):
             fact_lines[-1] = fact_lines[-1].rstrip('\n')
-        fact_lines[-1] = fact_lines[-1].rstrip()
-        std_lines[-1] = std_lines[-1].rstrip()
+        # fact_lines[-1] = fact_lines[-1].rstrip()
+        # std_lines[-1] = std_lines[-1].rstrip()
         if (fact_lines_num > std_lines_num or fact_lines_num < std_lines_num):
             return False
         for i in range(0, std_lines_num):
