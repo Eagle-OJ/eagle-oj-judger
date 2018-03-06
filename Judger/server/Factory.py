@@ -20,12 +20,12 @@ class LanguageFactory:
             obj.to_list()
             return obj
         if(self.language=='C' or self.language=='CPP'):
-            obj = C_CPP(my_config[self.language])
+            obj = C_CPP(config = my_config[self.language],data = kwargs['data'])
             obj.replace(self.outfile)
             obj.to_list()
             return obj
         if (self.language == 'PYTHON35' or self.language == 'PYTHON27'):
-            obj = PYTHON(my_config[self.language])
+            obj = PYTHON(config = my_config[self.language],data = kwargs['data'])
             obj.replace(self.outfile)
             obj.to_list()
             return obj

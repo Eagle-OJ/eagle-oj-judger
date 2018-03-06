@@ -1,8 +1,8 @@
 
 class C_CPP:
-    def __init__(self,config):
+    def __init__(self,config, data):
         self.exe_path = config['exe_path']
-        self.max_memory = config['max_memory']
+        self.max_memory = data['memory_limit']*1024*1024
         self.source_name = config['source_name']
         self.complication = config['complication']
         self.compile_command =config['compile_command']

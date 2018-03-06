@@ -13,7 +13,6 @@ lang_config={
     },
     'PYTHON35':{
         'exe_path':'/usr/bin/python3.5',
-        'max_memory': 128 * 1024 * 1024,
         'source_name':'Main.py',
         'complication': False,
         'compile_command': None,
@@ -24,7 +23,6 @@ lang_config={
     },
     'C':{
         'exe_path':'{exe_path}/Main',
-        'max_memory':128 * 1024 * 1024,
         'source_name':'Main.c',
         'complication':True,
         'compile_command':'gcc {exe_path}/Main.c -o {exe_path}/Main',
@@ -35,7 +33,6 @@ lang_config={
     },
     'CPP':{
         'exe_path': '{exe_path}/Main',
-        'max_memory': 128 * 1024 * 1024,
         'source_name': 'Main.cpp',
         'complication': True,
         'compile_command': 'g++ {exe_path}/Main.cpp -o {exe_path}/Main',
@@ -46,7 +43,6 @@ lang_config={
     },
     'PYTHON27':{
         'exe_path':'/usr/bin/python2.7',
-        'max_memory': 128 * 1024 * 1024,
         'source_name':'Main.py',
         'complication': False,
         'compile_command':None,
