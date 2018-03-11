@@ -8,7 +8,7 @@ class Validate:
     def validateAgrs(self):
         args = self.data
         # args = json.loads(self.data)
-        if(len(args) == 0 ):
+        if(len(args) == 0 or args == None):
             return False
 
         if('lang'not in args
@@ -19,7 +19,7 @@ class Validate:
             return False
 
         if(int(args['time_limit']) <= 0 or int(args['memory_limit']) <= 0):
-            return False 
+            return False
 
         if(len(args['test_cases']) == 0):
             return False
@@ -27,7 +27,8 @@ class Validate:
             for test_case in args['test_cases']:
                 if 'stdin' not in test_case or 'stdout' not in test_case:
                     return False
-
+                if(test_case['stdin'] == '') or (test_case['stdout'] == ''):
+                    return False;
         if(args['lang'] not in lang_config):
             return False
 
