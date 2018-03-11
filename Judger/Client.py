@@ -4,26 +4,31 @@ from flask import Flask, request, Response
 from server.Validate import Validate
 import gevent.monkey
 import psutil
+from flask_cors import *
 
 gevent.monkey.patch_all()
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 @app.route('/judge',methods=['POST'])
 def get_judge_result():
-	data = json.loads(request.get_data().decode('utf-8'))
-	validate = Validate(data)
-
-	#判断输入参数是否合法
-	if(not validate.validateAgrs()):
-		result = {
-			'error_message':'agrs are not legal',
+	try:
+		data = json.loads(request.get_data().decode('utf-8'))
+		validate = Validate(data)
+		if(not validate.validateAgrs()):
+				error = {
+					'error_message':'args are not legal',
+					'result':'SE'
+				}
+				return Response(json.dumps(error), mimetype='application/json')
+	except Exception as e:
+		error = {
+			'error_message':'args cannot be null',
 			'result':'SE'
 		}
-		return Response(json.dumps(result), mimetype='application/json')
-
+		return Response(json.dumps(error), mimetype='application/json')
 	try:
-			#判断标准输入是否为空null或者为空字符串
 		for item in data['test_cases']:
 			index = data['test_cases'].index(item)
 			if item['stdin'] == None or len(item['stdin']) == 0:
