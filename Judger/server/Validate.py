@@ -27,7 +27,7 @@ class Validate:
             for test_case in args['test_cases']:
                 if 'stdin' not in test_case or 'stdout' not in test_case:
                     return False
-                if(test_case['stdin'] == '') or (test_case['stdout'] == ''):
+                if (test_case['stdout'] == ''):
                     return False;
         if(args['lang'] not in lang_config):
             return False
